@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css grid</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script>
+
+		//Event listener for typing out shit
+		document.addEventListener("keydown", function(event){
+			// if (event.keyCode == "13"){
+			// 	num_op[num_op.length - 1] = num_op[num_op.length -1].substring(0, num_op.length -2);
+			// 	clicked('=')
+			// }
+
+			operators = ['+', '-', '*', '/', '=']
+			if (event.isTrusted){
+				console.log(event.key)
+				if (Number(event.key) || operators.includes(event.key)){
+				clicked(event.key)
+			}
+			}
+
+			if (event.key == "Enter"){
+				location.reload();
+			}
+			
+		})	
+
+		//Calculate Portion
+		let result = 0;
+		let num_op = [];
+
+		function clicked(numba){
+			if (Number(numba)){
+				let number = document.createTextNode(numba);
+				let screen = document.getElementById("calcs");
+				console.log(numba)
+				screen.appendChild(number);
+				if (Number(num_op[num_op.length -1]) && num_op.length > 0){
+					num_op[num_op.length -1] += numba
+				}
+				else{
+					num_op.push(numba);
+				}
+				console.log(num_op);
+
+			}
+			else if (numba === "="){
+				let eq = document.createTextNode('    ' + numba + '    ');
+				let screen = document.getElementById("calcs");
+				screen.appendChild(eq);
+
+				calcumalations();
+			}
+
+			else{
+				num_op.push(numba);
+		
+				let op = document.createTextNode('   ' + numba + '    ');
+				let screen = document.getElementById("calcs");
+				screen.appendChild(op);
+				
+			}
+			function calcumalations(){
+
+				let body = document.getElementById("body")
+				console.log(body)
+				body.style.background = "#f5feff"
+				for (i in num_op) {
+					console.log(i)
+					if (i === '0'){
+						result = parseInt(num_op[i], 10); 
+						console.log(result) 
+					}
+
+					if (Number(i) && i != 0){
+						switch(num_op[i - 1]){
+							case '+':
+								result += parseInt(num_op[i], 10);
+								break;
+							case '-':
+								result -= i;
+							case '×':
+								result *= parseInt(num_op[i], 10);
+								break;
+							case '÷':
+								result /= parseInt(num_op[i], 10);
+						}
+					}
+				}
+
+				let op = document.createTextNode('   ' + result + '   ');
+				let screen = document.getElementById("calcs");
+				screen.appendChild(op);
+				console.log(result);
+			}
+			
+		}
+	</script>
+</head>
+<body id = "body">
+	<div class= "screen"><p id = "calcs">|<p></div>
+	<div class = "container">
+		<div class = "nums">
+			<input type = "button" onclick = "clicked('1')" value = "1">
+			<input type = "button" onclick = "clicked('2')" value = "2">
+			<input type = "button" onclick = "clicked('3')" value = "3">
+			<input type = "button" onclick = "clicked('4')" value = "4">
+			<input type = "button" onclick = "clicked('5')" value = "5">
+			<input type = "button" onclick = "clicked('6')" value = "6">
+			<input type = "button" onclick = "clicked('7')" value = "7">
+			<input type = "button" onclick = "clicked('8')" value = "8">
+			<input type = "button" onclick = "clicked('9')" value = "9">
+
+		</div>
+		<input type = "button" onclick = "clicked('0')" class = "zero" value = "0">
+
+		<div class = "ops">
+			<input type = "button" onclick = "clicked('+')" value = "+">
+			<input type = "button" onclick = "clicked('-')" value = "-">
+			<input type = "button" onclick = "clicked('×')" value = "×">
+			<input type = "button" onclick = "clicked('÷')" value = "÷">
+		</div>
+
+		<input type = "button" onclick = "clicked('=')" value = "=">
+		<input type = "button" onclick = "location.reload()" value = "CE">
+
+	</div>
+
+</body>
+</html>

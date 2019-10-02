@@ -1,0 +1,60 @@
+body{
+}
+
+.container{
+	display: grid;
+	margin:10px;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-areas: "nums nums nums ops" "nums nums nums ops" "zero eq eq eq";
+	grid-gap: 4px;
+}
+.Screen{
+	display:grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	background-image: linear-gradient(#f0f0f0, #e6e6e6);
+}
+/*All button design*/
+.but{
+	cursor: pointer;
+	font-size: 50px;
+	text-align: center;
+	background-image: linear-gradient(white, #cfcfcf);	
+}
+
+.but:hover{
+	color: white;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 6px;
+}
+
+
+/*Area for numbers*/
+.nums{
+	grid-area: nums;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-row-gap: 4px;
+	grid-column-gap: 4px;
+}
+
+/*Area for operations*/
+.ops{
+	grid-area: ops;
+	display:grid;
+	grid-template-columns: repeat(2, 1fr);
+	background-image: linear-gradient(white, #cfcfcf);
+	grid-gap: 4px;
+}
+
+.zero{
+	grid-area: zero;
+	display:grid;
+	background-image: linear-gradient(white, #cfcfcf);
+
+}
+.eq{
+	grid-area: eq;
+	background-image: linear-gradient(white, #cfcfcf);
+}
+
